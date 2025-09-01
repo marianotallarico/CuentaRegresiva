@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cuenta Regresiva</title>
 <style>
-  /* Estilo general */
   html, body {
     height: 100%;
     margin: 0;
@@ -15,28 +14,43 @@
     align-items: center;
     background: url('TU_IMAGEN_AQUI.jpg') no-repeat center center fixed;
     background-size: cover;
-    color: #fff;
+    color: #6B4C3B;
     text-align: center;
   }
 
-  /* Contenedor del contador */
+  .countdown-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(245, 222, 179, 0.6);
+    padding: 25px 35px;
+    border-radius: 25px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  }
+
+  h1 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #A67B5B;
+  }
+
   .countdown {
-    background: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
-    padding: 20px 30px;
-    border-radius: 20px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap; /* evita que los bloques bajen */
   }
 
   .time-box {
-    display: inline-block;
-    margin: 10px;
+    margin: 0 10px; /* separación horizontal */
+    text-align: center;
   }
 
   .number {
-    font-size: 3em;
+    font-size: 2.5em; /* ajustado para móviles */
     font-weight: bold;
     display: block;
     animation: pulse 1s infinite alternate;
+    color: #8B6D5C;
   }
 
   .label {
@@ -51,32 +65,43 @@
     from { transform: scale(1); opacity: 1; }
     to { transform: scale(1.1); opacity: 0.8; }
   }
+
+  /* Ajuste para pantallas muy pequeñas */
+  @media (max-width: 360px) {
+    .number {
+      font-size: 2em;
+    }
+    .time-box {
+      margin: 0 5px;
+    }
+  }
 </style>
 </head>
 <body>
 
-<div class="countdown">
-  <div class="time-box">
-    <span class="number" id="days">0</span>
-    <span class="label">Días</span>
-  </div>
-  <div class="time-box">
-    <span class="number" id="hours">0</span>
-    <span class="label">Horas</span>
-  </div>
-  <div class="time-box">
-    <span class="number" id="minutes">0</span>
-    <span class="label">Minutos</span>
-  </div>
-  <div class="time-box">
-    <span class="number" id="seconds">0</span>
-    <span class="label">Segundos</span>
+<div class="countdown-container">
+  <h1>Nuestra propia primavera 🤎</h1>
+  <div class="countdown">
+    <div class="time-box">
+      <span class="number" id="days">0</span>
+      <span class="label">Días</span>
+    </div>
+    <div class="time-box">
+      <span class="number" id="hours">0</span>
+      <span class="label">Horas</span>
+    </div>
+    <div class="time-box">
+      <span class="number" id="minutes">0</span>
+      <span class="label">Minutos</span>
+    </div>
+    <div class="time-box">
+      <span class="number" id="seconds">0</span>
+      <span class="label">Segundos</span>
+    </div>
   </div>
 </div>
 
 <script>
-  // Fecha objetivo en formato ISO (válido en todos los navegadores)
-  // 20 septiembre 2025, 09:00 AM (hora local del dispositivo)
   const countdownDate = new Date("2025-09-20T09:00:00").getTime();
 
   const updateCountdown = () => {
@@ -84,7 +109,7 @@
     const distance = countdownDate - now;
 
     if (distance < 0) {
-      document.querySelector(".countdown").innerHTML = "<h1>¡Llegó el momento!</h1>";
+      document.querySelector(".countdown-container").innerHTML = "<h1>¡Llegó el momento!</h1>";
       clearInterval(interval);
       return;
     }
@@ -101,7 +126,7 @@
   };
 
   const interval = setInterval(updateCountdown, 1000);
-  updateCountdown(); // inicializa inmediatamente
+  updateCountdown();
 </script>
 
 </body>
