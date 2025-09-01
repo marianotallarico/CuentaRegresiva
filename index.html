@@ -1,21 +1,36 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cuenta Regresiva</title>
 <style>
-  html, body {
+  /* Contenedor del slideshow de fondo */
+  body {
     height: 100%;
     margin: 0;
     font-family: 'Arial', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('TU_IMAGEN_AQUI.jpg') no-repeat center center fixed;
-    background-size: cover;
     color: #6B4C3B;
     text-align: center;
+    overflow: hidden;
+  }
+
+  .background-slideshow {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .background-slideshow img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+  }
+
+  .background-slideshow img.active {
+    opacity: 0.6; /* transparencia que pediste */
   }
 
   .countdown-container {
@@ -26,58 +41,25 @@
     padding: 25px 35px;
     border-radius: 25px;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    z-index: 1; /* sobre las imágenes */
   }
 
-  h1 {
-    font-size: 1.8em;
-    margin-bottom: 20px;
-    color: #A67B5B;
-  }
-
-  .countdown {
-    display: flex;
-    justify-content: center;
-    flex-wrap: nowrap; /* evita que los bloques bajen */
-  }
-
-  .time-box {
-    margin: 0 10px; /* separación horizontal */
-    text-align: center;
-  }
-
-  .number {
-    font-size: 2.5em; /* ajustado para móviles */
-    font-weight: bold;
-    display: block;
-    animation: pulse 1s infinite alternate;
-    color: #8B6D5C;
-  }
-
-  .label {
-    font-size: 1em;
-    margin-top: 5px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.8;
-  }
-
-  @keyframes pulse {
-    from { transform: scale(1); opacity: 1; }
-    to { transform: scale(1.1); opacity: 0.8; }
-  }
-
-  /* Ajuste para pantallas muy pequeñas */
-  @media (max-width: 360px) {
-    .number {
-      font-size: 2em;
-    }
-    .time-box {
-      margin: 0 5px;
-    }
-  }
+  /* resto de tu CSS para countdown... */
 </style>
-</head>
+
 <body>
+
+<div class="background-slideshow">
+  <img src="IMAGEN1.jpg" class="active" alt="">
+  <img src="IMAGEN2.jpg" alt="">
+  <img src="IMAGEN3.jpg" alt="">
+  <img src="IMAGEN4.jpg" alt="">
+  <img src="IMAGEN5.jpg" alt="">
+  <img src="IMAGEN6.jpg" alt="">
+  <img src="IMAGEN7.jpg" alt="">
+  <!-- Agrega más imágenes aquí -->
+  <img src="IMAGEN0.jpg" alt=""> <!-- imagen principal, puede aparecer más tiempo o en otro efecto si quieres -->
+</div>
 
 <div class="countdown-container">
   <h1>Nuestra propia primavera 🤎</h1>
@@ -102,8 +84,8 @@
 </div>
 
 <script>
+  // Countdown
   const countdownDate = new Date("2025-09-20T09:00:00").getTime();
-
   const updateCountdown = () => {
     const now = new Date().getTime();
     const distance = countdownDate - now;
@@ -127,7 +109,16 @@
 
   const interval = setInterval(updateCountdown, 1000);
   updateCountdown();
-</script>
 
+  // Slideshow
+  const slides = document.querySelectorAll('.background-slideshow img');
+  let current = 0;
+
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, 5000); // cambia cada 5s, puedes ajustar
+
+</script>
 </body>
-</html>
