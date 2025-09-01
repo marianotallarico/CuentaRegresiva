@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuenta Regresiva</title>
+<style>
+  /* Estilo general */
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('TU_IMAGEN_AQUI.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    text-align: center;
+  }
+
+  /* Contenedor del contador */
+  .countdown {
+    background: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+    padding: 20px 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.8);
+  }
+
+  .time-box {
+    display: inline-block;
+    margin: 10px;
+  }
+
+  .number {
+    font-size: 3em;
+    font-weight: bold;
+    display: block;
+    animation: pulse 1s infinite alternate;
+  }
+
+  .label {
+    font-size: 1em;
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+  }
+
+  @keyframes pulse {
+    from { transform: scale(1); opacity: 1; }
+    to { transform: scale(1.1); opacity: 0.8; }
+  }
+</style>
+</head>
+<body>
+
+<div class="countdown">
+  <div class="time-box">
+    <span class="number" id="days">0</span>
+    <span class="label">Días</span>
+  </div>
+  <div class="time-box">
+    <span class="number" id="hours">0</span>
+    <span class="label">Horas</span>
+  </div>
+  <div class="time-box">
+    <span class="number" id="minutes">0</span>
+    <span class="label">Minutos</span>
+  </div>
+  <div class="time-box">
+    <span class="number" id="seconds">0</span>
+    <span class="label">Segundos</span>
+  </div>
+</div>
+
+<script>
+  // Fecha objetivo en formato ISO (válido en todos los navegadores)
+  // 20 septiembre 2025, 09:00 AM (hora local del dispositivo)
+  const countdownDate = new Date("2025-09-20T09:00:00").getTime();
+
+  const updateCountdown = () => {
+    const now = new Date().getTime();
+    const distance = countdownDate - now;
+
+    if (distance < 0) {
+      document.querySelector(".countdown").innerHTML = "<h1>¡Llegó el momento!</h1>";
+      clearInterval(interval);
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+  };
+
+  const interval = setInterval(updateCountdown, 1000);
+  updateCountdown(); // inicializa inmediatamente
+</script>
+
+</body>
+</html>
