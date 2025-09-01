@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slideshow Centrado</title>
 <style>
   /* Contenedor del slideshow de fondo */
   body {
@@ -10,6 +16,7 @@
     color: #6B4C3B;
     text-align: center;
     overflow: hidden;
+    background: black; /* fondo para cuando la imagen no llena */
   }
 
   .background-slideshow {
@@ -24,13 +31,15 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain; /* que se vea toda la imagen */
+    object-position: center center; /* centrado */
     opacity: 0;
     transition: opacity 2s ease-in-out;
+    background: black; /* relleno si hay espacio vacío */
   }
 
   .background-slideshow img.active {
-    opacity: 0.6; /* transparencia que pediste */
+    opacity: 0.6; /* transparencia */
   }
 
   .countdown-container {
@@ -44,21 +53,39 @@
     z-index: 1; /* sobre las imágenes */
   }
 
-  /* resto de tu CSS para countdown... */
-</style>
+  .countdown {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+  }
 
+  .time-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .number {
+    font-size: 2em;
+    font-weight: bold;
+  }
+
+  .label {
+    font-size: 0.9em;
+  }
+</style>
+</head>
 <body>
 
 <div class="background-slideshow">
-  <img src="IMAGEN1.jpg" class="active" alt="">
+  <img src="IMAGEN0.jpg" class="active" alt="Imagen principal">
+  <img src="IMAGEN1.jpg" alt="">
   <img src="IMAGEN2.jpg" alt="">
   <img src="IMAGEN3.jpg" alt="">
   <img src="IMAGEN4.jpg" alt="">
   <img src="IMAGEN5.jpg" alt="">
   <img src="IMAGEN6.jpg" alt="">
   <img src="IMAGEN7.jpg" alt="">
-  <!-- Agrega más imágenes aquí -->
-  <img src="IMAGEN0.jpg" alt=""> <!-- imagen principal, puede aparecer más tiempo o en otro efecto si quieres -->
 </div>
 
 <div class="countdown-container">
@@ -118,7 +145,8 @@
     slides[current].classList.remove('active');
     current = (current + 1) % slides.length;
     slides[current].classList.add('active');
-  }, 5000); // cambia cada 5s, puedes ajustar
-
+  }, 5000); // cambia cada 5s
 </script>
+
 </body>
+</html>
