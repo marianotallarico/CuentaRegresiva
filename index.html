@@ -31,14 +31,14 @@
     top: 0; left: 0;
     width: 100%;
     height: 100%;
-    background-size: cover;       /* llena todo el contenedor */
-    background-position: center;  /* centra la imagen */
+    background-size: cover;
+    background-position: center;
     opacity: 0;
     transition: opacity 2s ease-in-out;
   }
 
   .background-slideshow .slide.active {
-    opacity: 0.6; /* transparencia */
+    opacity: 0.6;
   }
 
   .countdown-container {
@@ -89,8 +89,8 @@
 </div>
 
 <div class="countdown-container">
-  <h1>Recta final, la espera se termina ✨</h1>
-  <h2>Aguantamos unas horitas más??? 🤎</h2>
+  <h1>¡¡¡ME DORMÍ!!!! 😱</h1>
+  <h2>Mentira, mi chiqui 🤎<br>Estoy yendo a buscarte 🚗✨</h2>
   <div class="countdown">
     <div class="time-box">
       <span class="number" id="days">0</span>
@@ -118,7 +118,7 @@
     const now = new Date().getTime();
     const distance = countdownDate - now;
     if (distance < 0) {
-      document.querySelector(".countdown-container").innerHTML = "<h1>¡Llegó el momento!</h1>";
+      document.querySelector(".countdown-container").innerHTML = "<h1>¡Estoy con vos! 🤎</h1>";
       clearInterval(interval);
       return;
     }
